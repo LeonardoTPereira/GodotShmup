@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyFormation" load_steps=4 format=3 uid="uid://d2ek5fg0www1v"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/enemy_formation.gd" id="1_gv52x"]
+[ext_resource type="PackedScene" uid="uid://824oluc010mt" path="res://Assets/Prefabs/enemy.tscn" id="1_o5aqw"]
+[ext_resource type="PackedScene" uid="uid://k70f07qbt70v" path="res://Assets/Prefabs/enemyblack2.tscn" id="2_3cd1q"]
+
+[resource]
+script = ExtResource("1_gv52x")
+enemy_list = Array[PackedScene]([ExtResource("1_o5aqw"), ExtResource("2_3cd1q")])
+enemy_count = Array[int]([2, 2])

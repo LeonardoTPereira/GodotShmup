@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://824oluc010mt"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/enemy.gd" id="1_3cm6n"]
+[ext_resource type="Material" uid="uid://deng0gjfxjv0t" path="res://Assets/Prefabs/enemy_material.tres" id="1_7px2y"]
+[ext_resource type="PackedScene" uid="uid://ldr646pt22cc" path="res://Assets/Prefabs/enemy_bullet.tscn" id="2_0qb32"]
+[ext_resource type="Texture2D" uid="uid://dy2icsx3jrm1c" path="res://Assets/Sprite/Enemy/enemyRed1.png" id="2_kih5h"]
+[ext_resource type="PackedScene" uid="uid://b7p5tie2sptly" path="res://Assets/Prefabs/red_muzzle_flash.tscn" id="3_a0n0l"]
+[ext_resource type="Texture2D" uid="uid://btf2w604c2ue0" path="res://Assets/Sprite/Player/gun02.png" id="3_imk31"]
+[ext_resource type="PackedScene" uid="uid://55dbyss4248w" path="res://Assets/Prefabs/explosion.tscn" id="3_tc15f"]
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+material = ExtResource("1_7px2y")
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_3cm6n")
+MyBullet = ExtResource("2_0qb32")
+Muzzle = ExtResource("3_a0n0l")
+Explosion = ExtResource("3_tc15f")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -23)
+scale = Vector2(0.992153, 1)
+polygon = PackedVector2Array(0, 0, 8.06328, 0, 11.087, -10, 29.2294, -18, 45.3559, 8, 24.1898, 63, 12.0949, 59, 19.1503, 33, 15.1186, 31, 11.087, 38, -11.087, 38, -16.1266, 30, -19.1503, 33, -12.0949, 59, -23.1819, 62, -45.3559, 8, -29.2294, -16, -11.087, -9, -10.0791, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("2_kih5h")
+
+[node name="LeftGun" type="Marker2D" parent="."]
+use_parent_material = true
+position = Vector2(-5, 25)
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftGun"]
+z_index = -1
+use_parent_material = true
+position = Vector2(0, -8)
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_imk31")
+
+[node name="RightGun" type="Marker2D" parent="."]
+use_parent_material = true
+position = Vector2(5, 25)
+
+[node name="Sprite2D" type="Sprite2D" parent="RightGun"]
+z_index = -1
+use_parent_material = true
+position = Vector2(0, -8)
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_imk31")
+
+[node name="ShootCooldown" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]

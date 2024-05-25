@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://yeyced4csymd"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/player.gd" id="1_7r0uf"]
+[ext_resource type="Texture2D" uid="uid://vmgfgw02eeh3" path="res://Assets/Sprite/Player/playerShip1_blue.png" id="1_5083f"]
+[ext_resource type="Material" uid="uid://deng0gjfxjv0t" path="res://Assets/Prefabs/enemy_material.tres" id="1_c8jkl"]
+[ext_resource type="Texture2D" uid="uid://de77lo0fj5tc4" path="res://Assets/Sprite/Player/gun00.png" id="2_6s5ja"]
+[ext_resource type="PackedScene" uid="uid://edxnoit20iyp" path="res://Assets/Prefabs/player_bullet.tscn" id="2_vvc7c"]
+[ext_resource type="PackedScene" uid="uid://c2l4dl3d4fjew" path="res://Assets/Prefabs/blue_muzzle_flash.tscn" id="4_3rwxr"]
+[ext_resource type="PackedScene" uid="uid://55dbyss4248w" path="res://Assets/Prefabs/explosion.tscn" id="4_mhuhh"]
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+material = ExtResource("1_c8jkl")
+script = ExtResource("1_7r0uf")
+MyBullet = ExtResource("2_vvc7c")
+Muzzle = ExtResource("4_3rwxr")
+health = 3
+Explosion = ExtResource("4_mhuhh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5083f")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-45, 11)
+scale = Vector2(15.7604, 15.1307)
+polygon = PackedVector2Array(-0.126902, -0.925274, 0.571051, -0.462639, 2.1573, -1.38791, 2.4111, -3.04018, 3.29941, -3.10627, 3.61666, -1.32182, 5.07601, -0.396545, 5.83741, -0.925274, 5.71051, 0.726997, 3.55321, 0.991364, 3.1725, 1.78445, 2.47455, 1.71836, 2.0304, 1.05745, 0.0634499, 0.726997)
+
+[node name="LeftGun" type="Marker2D" parent="."]
+position = Vector2(-36, -13)
+
+[node name="Sprite2D2" type="Sprite2D" parent="LeftGun"]
+z_index = -1
+position = Vector2(0, 8)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_6s5ja")
+
+[node name="RightGun" type="Marker2D" parent="."]
+position = Vector2(36, -13)
+
+[node name="Sprite2D" type="Sprite2D" parent="RightGun"]
+z_index = -1
+position = Vector2(0, 8)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_6s5ja")
+
+[node name="ShootCooldown" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]

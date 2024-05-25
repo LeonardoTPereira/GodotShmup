@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SpawnList" load_steps=3 format=3 uid="uid://bg4pm20mhijub"]
+
+[ext_resource type="Resource" uid="uid://d2ek5fg0www1v" path="res://Assets/Resources/intro_stage_enemy_formation1.tres" id="1_cbmt6"]
+[ext_resource type="Script" path="res://Assets/Scripts/spawn_list.gd" id="1_t071o"]
+
+[resource]
+script = ExtResource("1_t071o")
+enemy_formations = Array[Resource("res://Assets/Scripts/enemy_formation.gd")]([ExtResource("1_cbmt6"), ExtResource("1_cbmt6"), ExtResource("1_cbmt6"), ExtResource("1_cbmt6")])

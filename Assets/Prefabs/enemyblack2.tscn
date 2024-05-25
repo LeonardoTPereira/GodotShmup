@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://k70f07qbt70v"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/enemy.gd" id="1_0osjd"]
+[ext_resource type="Material" uid="uid://deng0gjfxjv0t" path="res://Assets/Prefabs/enemy_material.tres" id="1_axfpt"]
+[ext_resource type="PackedScene" uid="uid://c00xh1xhtpwja" path="res://Assets/Prefabs/black_enemy_bullet.tscn" id="2_x0x8n"]
+[ext_resource type="PackedScene" uid="uid://dhsvb3lpyjydg" path="res://Assets/Prefabs/black_muzzle_flash.tscn" id="3_bbt6t"]
+[ext_resource type="PackedScene" uid="uid://55dbyss4248w" path="res://Assets/Prefabs/explosion.tscn" id="4_ogeig"]
+[ext_resource type="Texture2D" uid="uid://do3rmu7l2t8f4" path="res://Assets/Sprite/Enemy/enemyBlack2.png" id="5_ane27"]
+[ext_resource type="Texture2D" uid="uid://btf2w604c2ue0" path="res://Assets/Sprite/Player/gun02.png" id="6_0r4pa"]
+
+[node name="Black2Enemy" type="CharacterBody2D" groups=["Enemy"]]
+material = ExtResource("1_axfpt")
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_0osjd")
+speed = 150.0
+score = 20
+MyBullet = ExtResource("2_x0x8n")
+Muzzle = ExtResource("3_bbt6t")
+health = 2
+Explosion = ExtResource("4_ogeig")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -23)
+scale = Vector2(0.992153, 1)
+polygon = PackedVector2Array(0, -19, 18.1424, -9, 18.1424, -3, 34.2689, 9, 50.3955, 9, 50.3955, 15, 24.1898, 63, 8.06327, 63, 10.0791, 49, -8.06327, 49, -8.06327, 63, -22.174, 63, -50.3955, 15, -50.3955, 9, -36.2847, 9, -20.1582, -3, -18.1424, -9)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("5_ane27")
+
+[node name="LeftGun" type="Marker2D" parent="."]
+use_parent_material = true
+position = Vector2(-11, 52)
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftGun"]
+z_index = -1
+use_parent_material = true
+position = Vector2(0, -8)
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_0r4pa")
+
+[node name="RightGun" type="Marker2D" parent="."]
+use_parent_material = true
+position = Vector2(11, 52)
+
+[node name="Sprite2D" type="Sprite2D" parent="RightGun"]
+z_index = -1
+use_parent_material = true
+position = Vector2(0, -8)
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_0r4pa")
+
+[node name="ShootCooldown" type="Timer" parent="."]
+wait_time = 0.8
+autostart = true
+
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]

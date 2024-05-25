@@ -1,0 +1,15 @@
+DirectionalLight2D
+PointLight2D
+AnimationPlayer
+CPUParticles2D
+HBoxContainer
+CanvasLayer
+Sprite2D
+ParallaxLayer
+ParallaxBackground
+Button
+VBoxContainer
+CenterContainer
+Label
+ColorRect
+Control

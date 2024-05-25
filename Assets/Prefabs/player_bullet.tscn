@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://edxnoit20iyp"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/bullet.gd" id="1_gkphu"]
+[ext_resource type="Texture2D" uid="uid://dt32rt26gnbj8" path="res://Assets/Sprite/Bullet/laserBlue03.png" id="2_dttdv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ajnfi"]
+radius = 4.0
+height = 38.0
+
+[node name="PlayerBullet" type="Area2D" groups=["PlayerBullet"]]
+z_index = -2
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_gkphu")
+speed = Vector2(0, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ajnfi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dttdv")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
